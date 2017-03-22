@@ -43,7 +43,7 @@ public class Part03StepVerifier {
 
 	// TODO Use StepVerifier to check that the flux parameter emits "foo" and "bar" elements then completes successfully.
 	void expectFooBarComplete(Flux<String> flux) {
-		fail();
+		StepVerifier.create(flux).expectNext("foo","bar").verifyComplete();
 	}
 
 //========================================================================================
@@ -67,19 +67,19 @@ public class Part03StepVerifier {
 
 	// TODO Use StepVerifier to check that the flux parameter emits a User with "swhite" username and another one with "jpinkman" then completes successfully.
 	void expectSkylerJesseComplete(Flux<User> flux) {
-		fail();
+		StepVerifier.create(flux).expectNextMatches(u->"swhite".equals(u.getUsername())).expectNextMatches(u->"jpinkman".equals(u.getUsername())).verifyComplete();
 	}
 
 //========================================================================================
 
-	@Test
+	@Test(timeout=11000L)
 	public void count() {
 		expect10Elements(Flux.interval(Duration.ofSeconds(1)).take(10));
 	}
 
 	// TODO Expect 10 elements then complete and notice how long it takes for running the test
 	void expect10Elements(Flux<Long> flux) {
-		fail();
+		StepVerifier.create(flux).expectNextCount(10).verifyComplete();
 	}
 
 //========================================================================================
@@ -91,7 +91,7 @@ public class Part03StepVerifier {
 
 	// TODO Expect 3600 elements then complete using the virtual time capabilities provided via StepVerifier.withVirtualTime() and notice how long it takes for running the test
 	void expect3600Elements(Supplier<Flux<Long>> supplier) {
-		fail();
+		StepVerifier.withVirtualTime(supplier).expectNextCount(3600);
 	}
 
 }
