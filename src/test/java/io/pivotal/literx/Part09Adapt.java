@@ -18,6 +18,7 @@ package io.pivotal.literx;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 import io.pivotal.literx.domain.User;
 import io.pivotal.literx.repository.ReactiveRepository;
@@ -60,7 +61,7 @@ public class Part09Adapt {
 
 	// TODO Adapt Flux to RxJava Flowable
 	Flowable<User> fromFluxToFlowable(Flux<User> flux) {
-		return null;
+		return Flowable.fromIterable(flux.toIterable());
 	}
 
 	// TODO Adapt RxJava Flowable to Flux

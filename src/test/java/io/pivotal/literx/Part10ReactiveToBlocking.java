@@ -1,6 +1,7 @@
 package io.pivotal.literx;
 
 import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 import io.pivotal.literx.domain.User;
 import io.pivotal.literx.repository.ReactiveRepository;
@@ -31,7 +32,7 @@ public class Part10ReactiveToBlocking {
 
 	// TODO Return the user contained in that Mono
 	User monoToValue(Mono<User> mono) {
-		return null;
+		return mono.block();
 	}
 
 //========================================================================================
@@ -50,7 +51,7 @@ public class Part10ReactiveToBlocking {
 
 	// TODO Return the users contained in that Flux
 	Iterable<User> fluxToValues(Flux<User> flux) {
-		return null;
+		return flux.toIterable();
 	}
 
 }
